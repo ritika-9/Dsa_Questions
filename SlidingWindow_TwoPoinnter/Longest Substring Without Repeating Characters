@@ -1,3 +1,4 @@
+//optimal solution
 class Solution {
     public int lengthOfLongestSubstring(String s) {
         if (s.length()==0) return 0;
@@ -20,3 +21,33 @@ class Solution {
 
     }
 }
+
+//brute force solution
+import java.util.*;
+public class Main{
+    static int solve(String str) {
+        if (str.length() == 0)
+            return 0;
+        int maxans = Integer.MIN_VALUE;
+
+        for (int i = 0; i < str.length(); i++) {
+            Set<Character> se = new HashSet<>();
+
+            for (int j = i; j < str.length(); j++) {
+                if (se.contains(str.charAt(j))) {
+                    maxans = Math.max(maxans, j - i);
+                    break;
+                }
+                se.add(str.charAt(j));
+            }
+
+            // Handle case when we reach end of string without a duplicate
+            maxans = Math.max(maxans, str.length() - i);
+        }
+
+        return maxans;
+        
+    }
+
+}
+
