@@ -1,0 +1,27 @@
+//brute force: use two for loops, i for starting of subpart,j for end of string. count zero each each time and check if they are less than k nd update the maxlength.
+
+//better: use a while loop(r<nums.length), count each time the zero, and if zero exceed then move the left till a zero is encountered and reduce it, till the zero<=k.
+
+//optimal solution: here only use one while loop, count the zeroes, and if exceeded then just check a condition that if a zero comes from left pointer then reduce zero and increse left pinter and keep mving the right pointer. once the zero is under control <k , the updatethe max len.
+code: class Solution {
+    public int longestOnes(int[] nums, int k) {
+        int max=0;
+        int l=0;
+        int r=0;
+        int zero=0;
+        while(r < nums.length){
+            if(nums[r]==0) zero++;
+            if(zero>k){
+                if(nums[l]==0){
+                    zero--;
+                }
+                l++;
+            }
+            if(zero<=k){
+                max=Math.max(max,r-l+1);
+            }
+            r++;
+        }return max;
+    }
+              
+}
